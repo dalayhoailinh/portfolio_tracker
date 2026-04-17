@@ -15,12 +15,13 @@ class ShellPage extends StatelessWidget {
     final currentIndex = _tab.indexWhere(
       (tab) => location == tab || location.startsWith('$tab/'),
     );
+    final safeIndex = currentIndex < 0 ? 0 : currentIndex;
 
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
+        currentIndex: safeIndex,
         backgroundColor: AppColors.surface,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.textSecondary,
