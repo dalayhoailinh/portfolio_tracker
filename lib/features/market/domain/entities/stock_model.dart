@@ -10,6 +10,7 @@ abstract class StockModel with _$StockModel {
     required String name,
     required double price,
     required double seedPrice,
+    @Default(0.0) double changePercent,
   }) = _StockModel;
 
   factory StockModel.fromJson(Map<String, dynamic> json) =>

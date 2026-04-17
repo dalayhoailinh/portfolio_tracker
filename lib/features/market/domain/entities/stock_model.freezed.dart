@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$StockModel {
 
- String get symbol; String get name; double get price; double get seedPrice;
+ String get symbol; String get name; double get price; double get seedPrice; double get changePercent;
 /// Create a copy of StockModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $StockModelCopyWith<StockModel> get copyWith => _$StockModelCopyWithImpl<StockMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StockModel&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StockModel&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,symbol,name,price,seedPrice);
+int get hashCode => Object.hash(runtimeType,symbol,name,price,seedPrice,changePercent);
 
 @override
 String toString() {
-  return 'StockModel(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice)';
+  return 'StockModel(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice, changePercent: $changePercent)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $StockModelCopyWith<$Res>  {
   factory $StockModelCopyWith(StockModel value, $Res Function(StockModel) _then) = _$StockModelCopyWithImpl;
 @useResult
 $Res call({
- String symbol, String name, double price, double seedPrice
+ String symbol, String name, double price, double seedPrice, double changePercent
 });
 
 
@@ -65,12 +65,13 @@ class _$StockModelCopyWithImpl<$Res>
 
 /// Create a copy of StockModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? symbol = null,Object? name = null,Object? price = null,Object? seedPrice = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? symbol = null,Object? name = null,Object? price = null,Object? seedPrice = null,Object? changePercent = null,}) {
   return _then(_self.copyWith(
 symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double,seedPrice: null == seedPrice ? _self.seedPrice : seedPrice // ignore: cast_nullable_to_non_nullable
+as double,changePercent: null == changePercent ? _self.changePercent : changePercent // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String symbol,  String name,  double price,  double seedPrice)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String symbol,  String name,  double price,  double seedPrice,  double changePercent)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _StockModel() when $default != null:
-return $default(_that.symbol,_that.name,_that.price,_that.seedPrice);case _:
+return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.changePercent);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.symbol,_that.name,_that.price,_that.seedPrice);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String symbol,  String name,  double price,  double seedPrice)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String symbol,  String name,  double price,  double seedPrice,  double changePercent)  $default,) {final _that = this;
 switch (_that) {
 case _StockModel():
-return $default(_that.symbol,_that.name,_that.price,_that.seedPrice);case _:
+return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.changePercent);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.symbol,_that.name,_that.price,_that.seedPrice);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String symbol,  String name,  double price,  double seedPrice)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String symbol,  String name,  double price,  double seedPrice,  double changePercent)?  $default,) {final _that = this;
 switch (_that) {
 case _StockModel() when $default != null:
-return $default(_that.symbol,_that.name,_that.price,_that.seedPrice);case _:
+return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.changePercent);case _:
   return null;
 
 }
@@ -212,13 +213,14 @@ return $default(_that.symbol,_that.name,_that.price,_that.seedPrice);case _:
 @JsonSerializable()
 
 class _StockModel implements StockModel {
-  const _StockModel({required this.symbol, required this.name, required this.price, required this.seedPrice});
+  const _StockModel({required this.symbol, required this.name, required this.price, required this.seedPrice, this.changePercent = 0.0});
   factory _StockModel.fromJson(Map<String, dynamic> json) => _$StockModelFromJson(json);
 
 @override final  String symbol;
 @override final  String name;
 @override final  double price;
 @override final  double seedPrice;
+@override@JsonKey() final  double changePercent;
 
 /// Create a copy of StockModel
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StockModel&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StockModel&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,symbol,name,price,seedPrice);
+int get hashCode => Object.hash(runtimeType,symbol,name,price,seedPrice,changePercent);
 
 @override
 String toString() {
-  return 'StockModel(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice)';
+  return 'StockModel(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice, changePercent: $changePercent)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$StockModelCopyWith<$Res> implements $StockModelCopyWith<$
   factory _$StockModelCopyWith(_StockModel value, $Res Function(_StockModel) _then) = __$StockModelCopyWithImpl;
 @override @useResult
 $Res call({
- String symbol, String name, double price, double seedPrice
+ String symbol, String name, double price, double seedPrice, double changePercent
 });
 
 
@@ -270,12 +272,13 @@ class __$StockModelCopyWithImpl<$Res>
 
 /// Create a copy of StockModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? symbol = null,Object? name = null,Object? price = null,Object? seedPrice = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? symbol = null,Object? name = null,Object? price = null,Object? seedPrice = null,Object? changePercent = null,}) {
   return _then(_StockModel(
 symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double,seedPrice: null == seedPrice ? _self.seedPrice : seedPrice // ignore: cast_nullable_to_non_nullable
+as double,changePercent: null == changePercent ? _self.changePercent : changePercent // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
