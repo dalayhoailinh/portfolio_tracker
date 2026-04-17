@@ -6,6 +6,7 @@ part 'minute_candle.g.dart';
 @freezed
 abstract class MinuteCandle with _$MinuteCandle {
   const factory MinuteCandle({
+    required int index,
     required double open,
     required double high,
     required double low,

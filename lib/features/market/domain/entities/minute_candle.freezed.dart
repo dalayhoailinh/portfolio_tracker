@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MinuteCandle {
 
- double get open; double get high; double get low; double get close;
+ int get index; double get open; double get high; double get low; double get close;
 /// Create a copy of MinuteCandle
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $MinuteCandleCopyWith<MinuteCandle> get copyWith => _$MinuteCandleCopyWithImpl<M
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MinuteCandle&&(identical(other.open, open) || other.open == open)&&(identical(other.high, high) || other.high == high)&&(identical(other.low, low) || other.low == low)&&(identical(other.close, close) || other.close == close));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MinuteCandle&&(identical(other.index, index) || other.index == index)&&(identical(other.open, open) || other.open == open)&&(identical(other.high, high) || other.high == high)&&(identical(other.low, low) || other.low == low)&&(identical(other.close, close) || other.close == close));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,open,high,low,close);
+int get hashCode => Object.hash(runtimeType,index,open,high,low,close);
 
 @override
 String toString() {
-  return 'MinuteCandle(open: $open, high: $high, low: $low, close: $close)';
+  return 'MinuteCandle(index: $index, open: $open, high: $high, low: $low, close: $close)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $MinuteCandleCopyWith<$Res>  {
   factory $MinuteCandleCopyWith(MinuteCandle value, $Res Function(MinuteCandle) _then) = _$MinuteCandleCopyWithImpl;
 @useResult
 $Res call({
- double open, double high, double low, double close
+ int index, double open, double high, double low, double close
 });
 
 
@@ -65,9 +65,10 @@ class _$MinuteCandleCopyWithImpl<$Res>
 
 /// Create a copy of MinuteCandle
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? open = null,Object? high = null,Object? low = null,Object? close = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? index = null,Object? open = null,Object? high = null,Object? low = null,Object? close = null,}) {
   return _then(_self.copyWith(
-open: null == open ? _self.open : open // ignore: cast_nullable_to_non_nullable
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,open: null == open ? _self.open : open // ignore: cast_nullable_to_non_nullable
 as double,high: null == high ? _self.high : high // ignore: cast_nullable_to_non_nullable
 as double,low: null == low ? _self.low : low // ignore: cast_nullable_to_non_nullable
 as double,close: null == close ? _self.close : close // ignore: cast_nullable_to_non_nullable
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double open,  double high,  double low,  double close)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int index,  double open,  double high,  double low,  double close)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MinuteCandle() when $default != null:
-return $default(_that.open,_that.high,_that.low,_that.close);case _:
+return $default(_that.index,_that.open,_that.high,_that.low,_that.close);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.open,_that.high,_that.low,_that.close);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double open,  double high,  double low,  double close)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int index,  double open,  double high,  double low,  double close)  $default,) {final _that = this;
 switch (_that) {
 case _MinuteCandle():
-return $default(_that.open,_that.high,_that.low,_that.close);case _:
+return $default(_that.index,_that.open,_that.high,_that.low,_that.close);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.open,_that.high,_that.low,_that.close);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double open,  double high,  double low,  double close)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int index,  double open,  double high,  double low,  double close)?  $default,) {final _that = this;
 switch (_that) {
 case _MinuteCandle() when $default != null:
-return $default(_that.open,_that.high,_that.low,_that.close);case _:
+return $default(_that.index,_that.open,_that.high,_that.low,_that.close);case _:
   return null;
 
 }
@@ -212,9 +213,10 @@ return $default(_that.open,_that.high,_that.low,_that.close);case _:
 @JsonSerializable()
 
 class _MinuteCandle implements MinuteCandle {
-  const _MinuteCandle({required this.open, required this.high, required this.low, required this.close});
+  const _MinuteCandle({required this.index, required this.open, required this.high, required this.low, required this.close});
   factory _MinuteCandle.fromJson(Map<String, dynamic> json) => _$MinuteCandleFromJson(json);
 
+@override final  int index;
 @override final  double open;
 @override final  double high;
 @override final  double low;
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MinuteCandle&&(identical(other.open, open) || other.open == open)&&(identical(other.high, high) || other.high == high)&&(identical(other.low, low) || other.low == low)&&(identical(other.close, close) || other.close == close));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MinuteCandle&&(identical(other.index, index) || other.index == index)&&(identical(other.open, open) || other.open == open)&&(identical(other.high, high) || other.high == high)&&(identical(other.low, low) || other.low == low)&&(identical(other.close, close) || other.close == close));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,open,high,low,close);
+int get hashCode => Object.hash(runtimeType,index,open,high,low,close);
 
 @override
 String toString() {
-  return 'MinuteCandle(open: $open, high: $high, low: $low, close: $close)';
+  return 'MinuteCandle(index: $index, open: $open, high: $high, low: $low, close: $close)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$MinuteCandleCopyWith<$Res> implements $MinuteCandleCopyWi
   factory _$MinuteCandleCopyWith(_MinuteCandle value, $Res Function(_MinuteCandle) _then) = __$MinuteCandleCopyWithImpl;
 @override @useResult
 $Res call({
- double open, double high, double low, double close
+ int index, double open, double high, double low, double close
 });
 
 
@@ -270,9 +272,10 @@ class __$MinuteCandleCopyWithImpl<$Res>
 
 /// Create a copy of MinuteCandle
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? open = null,Object? high = null,Object? low = null,Object? close = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? index = null,Object? open = null,Object? high = null,Object? low = null,Object? close = null,}) {
   return _then(_MinuteCandle(
-open: null == open ? _self.open : open // ignore: cast_nullable_to_non_nullable
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,open: null == open ? _self.open : open // ignore: cast_nullable_to_non_nullable
 as double,high: null == high ? _self.high : high // ignore: cast_nullable_to_non_nullable
 as double,low: null == low ? _self.low : low // ignore: cast_nullable_to_non_nullable
 as double,close: null == close ? _self.close : close // ignore: cast_nullable_to_non_nullable

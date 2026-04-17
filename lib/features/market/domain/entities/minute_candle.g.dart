@@ -8,6 +8,7 @@ part of 'minute_candle.dart';
 
 _MinuteCandle _$MinuteCandleFromJson(Map<String, dynamic> json) =>
     _MinuteCandle(
+      index: (json['index'] as num).toInt(),
       open: (json['open'] as num).toDouble(),
       high: (json['high'] as num).toDouble(),
       low: (json['low'] as num).toDouble(),
@@ -16,6 +17,7 @@ _MinuteCandle _$MinuteCandleFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$MinuteCandleToJson(_MinuteCandle instance) =>
     <String, dynamic>{
+      'index': instance.index,
       'open': instance.open,
       'high': instance.high,
       'low': instance.low,
