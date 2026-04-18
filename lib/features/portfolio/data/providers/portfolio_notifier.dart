@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/legacy.dart';
 import '../../domain/entities/portfolio_state.dart';
 import '../services/portfolio_local_storage.dart';
 
-class PortfolioProvider extends StateNotifier<PortfolioState> {
+class PortfolioNotifier extends StateNotifier<PortfolioState> {
   final PortfolioLocalStorage _storage;
 
-  PortfolioProvider({required PortfolioLocalStorage storage})
+  PortfolioNotifier({required PortfolioLocalStorage storage})
     : _storage = storage,
       super(PortfolioState.initial) {
     _init();
@@ -34,6 +34,6 @@ class PortfolioProvider extends StateNotifier<PortfolioState> {
 }
 
 final portfolioProvider =
-    StateNotifierProvider<PortfolioProvider, PortfolioState>(
-      (ref) => PortfolioProvider(storage: PortfolioLocalStorage()),
-    );
+    StateNotifierProvider<PortfolioNotifier, PortfolioState>((ref) {
+      return PortfolioNotifier(storage: PortfolioLocalStorage());
+    });
