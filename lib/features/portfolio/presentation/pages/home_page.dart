@@ -41,7 +41,12 @@ class HomePage extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            PortfolioSummaryCard(portfolioState: portfolioState),
+            PortfolioSummaryCard(
+              portfolioState: portfolioState,
+              onPressed: () {
+                ref.read(portfolioProvider.notifier).resetPortfolio();
+              },
+            ),
             const SizedBox(height: 20),
           ],
         ),

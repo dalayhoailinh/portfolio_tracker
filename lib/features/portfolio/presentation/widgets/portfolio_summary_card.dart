@@ -7,7 +7,12 @@ import 'summary_item.dart';
 
 class PortfolioSummaryCard extends StatelessWidget {
   final PortfolioState portfolioState;
-  const PortfolioSummaryCard({super.key, required this.portfolioState});
+  final VoidCallback? onPressed;
+  const PortfolioSummaryCard({
+    super.key,
+    required this.portfolioState,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,13 @@ class PortfolioSummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Portfolio Summary', style: AppTextStyles.titleMedium),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Portfolio Summary', style: AppTextStyles.titleMedium),
+              TextButton(onPressed: onPressed, child: Text('Reset')),
+            ],
+          ),
           const SizedBox(height: 14),
           Row(
             children: [

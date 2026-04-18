@@ -11,7 +11,7 @@ class StockTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPositive = stock.changePercent >= 0;
+    final isPositive = stock.changePercent > 0;
     final prefix = isPositive ? '+' : '';
 
     return Container(

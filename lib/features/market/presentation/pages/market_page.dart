@@ -12,7 +12,15 @@ class MarketPage extends ConsumerWidget {
     final marketState = ref.watch(marketProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Market')),
+      appBar: AppBar(
+        title: const Text('Market'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () => ref.read(marketProvider.notifier).resetMarket(),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: ListView.builder(
           padding: const EdgeInsets.all(16),
