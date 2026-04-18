@@ -7,7 +7,7 @@ class ShellPage extends StatelessWidget {
   final Widget child;
   const ShellPage({super.key, required this.child});
 
-  static const _tab = ['/', '/chart'];
+  static const _tab = ['/', '/market'];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,10 @@ class ShellPage extends StatelessWidget {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.show_chart), label: 'Chart'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.show_chart),
+            label: 'Market',
+          ),
         ],
       ),
     );
