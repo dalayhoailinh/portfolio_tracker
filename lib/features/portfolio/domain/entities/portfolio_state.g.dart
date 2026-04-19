@@ -11,6 +11,11 @@ _PortfolioState _$PortfolioStateFromJson(Map<String, dynamic> json) =>
       cash: (json['cash'] as num).toDouble(),
       realizedPnL: (json['realizedPnL'] as num).toDouble(),
       unrealizedPnL: (json['unrealizedPnL'] as num).toDouble(),
+      positions:
+          (json['positions'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, Position.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          const {},
     );
 
 Map<String, dynamic> _$PortfolioStateToJson(_PortfolioState instance) =>
@@ -18,4 +23,5 @@ Map<String, dynamic> _$PortfolioStateToJson(_PortfolioState instance) =>
       'cash': instance.cash,
       'realizedPnL': instance.realizedPnL,
       'unrealizedPnL': instance.unrealizedPnL,
+      'positions': instance.positions,
     };
