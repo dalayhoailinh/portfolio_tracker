@@ -29,5 +29,5 @@ abstract class PortfolioState with _$PortfolioState {
   double get totalCostBasis =>
       positions.values.fold(0.0, (sum, pos) => sum + pos.totalCost);
 
-  double get totalEquity => cash + unrealizedPnL;
+  double get totalEquity => cash + totalCostBasis + unrealizedPnL;
 }
