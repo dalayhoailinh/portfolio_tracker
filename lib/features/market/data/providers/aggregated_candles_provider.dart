@@ -10,7 +10,12 @@ typedef CandleQuery = ({String symbol, MarketTimeframe timeframe});
 final aggregatedCandlesProvider =
     Provider.family<List<MinuteCandle>, CandleQuery>((ref, query) {
       final market = ref.watch(marketProvider);
-      final m1 = market.candles[query.symbol] ?? const <MinuteCandle>[];
+      final m1Closed = market.candles[query.symbol] ?? const <MinuteCandle>[];
+      final live = market.liveCandles[query.symbol];
+      final List<MinuteCandle> m1 = live != null
+          ? [...m1Closed, live]
+          : m1Closed;
+
       return CandleAggregator.aggregate(
         m1Candles: m1,
         timeframe: query.timeframe,
