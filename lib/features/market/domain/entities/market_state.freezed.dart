@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MarketState {
 
- List<StockModel> get stocks; Map<String, List<MinuteCandle>> get candles;
+ List<StockModel> get stocks; Map<String, List<MinuteCandle>> get candles; Map<String, MinuteCandle> get liveCandles;
 /// Create a copy of MarketState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MarketStateCopyWith<MarketState> get copyWith => _$MarketStateCopyWithImpl<Mark
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketState&&const DeepCollectionEquality().equals(other.stocks, stocks)&&const DeepCollectionEquality().equals(other.candles, candles));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketState&&const DeepCollectionEquality().equals(other.stocks, stocks)&&const DeepCollectionEquality().equals(other.candles, candles)&&const DeepCollectionEquality().equals(other.liveCandles, liveCandles));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(stocks),const DeepCollectionEquality().hash(candles));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(stocks),const DeepCollectionEquality().hash(candles),const DeepCollectionEquality().hash(liveCandles));
 
 @override
 String toString() {
-  return 'MarketState(stocks: $stocks, candles: $candles)';
+  return 'MarketState(stocks: $stocks, candles: $candles, liveCandles: $liveCandles)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MarketStateCopyWith<$Res>  {
   factory $MarketStateCopyWith(MarketState value, $Res Function(MarketState) _then) = _$MarketStateCopyWithImpl;
 @useResult
 $Res call({
- List<StockModel> stocks, Map<String, List<MinuteCandle>> candles
+ List<StockModel> stocks, Map<String, List<MinuteCandle>> candles, Map<String, MinuteCandle> liveCandles
 });
 
 
@@ -62,11 +62,12 @@ class _$MarketStateCopyWithImpl<$Res>
 
 /// Create a copy of MarketState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? stocks = null,Object? candles = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? stocks = null,Object? candles = null,Object? liveCandles = null,}) {
   return _then(_self.copyWith(
 stocks: null == stocks ? _self.stocks : stocks // ignore: cast_nullable_to_non_nullable
 as List<StockModel>,candles: null == candles ? _self.candles : candles // ignore: cast_nullable_to_non_nullable
-as Map<String, List<MinuteCandle>>,
+as Map<String, List<MinuteCandle>>,liveCandles: null == liveCandles ? _self.liveCandles : liveCandles // ignore: cast_nullable_to_non_nullable
+as Map<String, MinuteCandle>,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<StockModel> stocks,  Map<String, List<MinuteCandle>> candles)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<StockModel> stocks,  Map<String, List<MinuteCandle>> candles,  Map<String, MinuteCandle> liveCandles)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketState() when $default != null:
-return $default(_that.stocks,_that.candles);case _:
+return $default(_that.stocks,_that.candles,_that.liveCandles);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.stocks,_that.candles);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<StockModel> stocks,  Map<String, List<MinuteCandle>> candles)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<StockModel> stocks,  Map<String, List<MinuteCandle>> candles,  Map<String, MinuteCandle> liveCandles)  $default,) {final _that = this;
 switch (_that) {
 case _MarketState():
-return $default(_that.stocks,_that.candles);case _:
+return $default(_that.stocks,_that.candles,_that.liveCandles);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.stocks,_that.candles);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<StockModel> stocks,  Map<String, List<MinuteCandle>> candles)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<StockModel> stocks,  Map<String, List<MinuteCandle>> candles,  Map<String, MinuteCandle> liveCandles)?  $default,) {final _that = this;
 switch (_that) {
 case _MarketState() when $default != null:
-return $default(_that.stocks,_that.candles);case _:
+return $default(_that.stocks,_that.candles,_that.liveCandles);case _:
   return null;
 
 }
@@ -207,7 +208,7 @@ return $default(_that.stocks,_that.candles);case _:
 
 
 class _MarketState implements MarketState {
-  const _MarketState({required final  List<StockModel> stocks, required final  Map<String, List<MinuteCandle>> candles}): _stocks = stocks,_candles = candles;
+  const _MarketState({required final  List<StockModel> stocks, required final  Map<String, List<MinuteCandle>> candles, required final  Map<String, MinuteCandle> liveCandles}): _stocks = stocks,_candles = candles,_liveCandles = liveCandles;
   
 
  final  List<StockModel> _stocks;
@@ -224,6 +225,13 @@ class _MarketState implements MarketState {
   return EqualUnmodifiableMapView(_candles);
 }
 
+ final  Map<String, MinuteCandle> _liveCandles;
+@override Map<String, MinuteCandle> get liveCandles {
+  if (_liveCandles is EqualUnmodifiableMapView) return _liveCandles;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_liveCandles);
+}
+
 
 /// Create a copy of MarketState
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +243,16 @@ _$MarketStateCopyWith<_MarketState> get copyWith => __$MarketStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketState&&const DeepCollectionEquality().equals(other._stocks, _stocks)&&const DeepCollectionEquality().equals(other._candles, _candles));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketState&&const DeepCollectionEquality().equals(other._stocks, _stocks)&&const DeepCollectionEquality().equals(other._candles, _candles)&&const DeepCollectionEquality().equals(other._liveCandles, _liveCandles));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_stocks),const DeepCollectionEquality().hash(_candles));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_stocks),const DeepCollectionEquality().hash(_candles),const DeepCollectionEquality().hash(_liveCandles));
 
 @override
 String toString() {
-  return 'MarketState(stocks: $stocks, candles: $candles)';
+  return 'MarketState(stocks: $stocks, candles: $candles, liveCandles: $liveCandles)';
 }
 
 
@@ -255,7 +263,7 @@ abstract mixin class _$MarketStateCopyWith<$Res> implements $MarketStateCopyWith
   factory _$MarketStateCopyWith(_MarketState value, $Res Function(_MarketState) _then) = __$MarketStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<StockModel> stocks, Map<String, List<MinuteCandle>> candles
+ List<StockModel> stocks, Map<String, List<MinuteCandle>> candles, Map<String, MinuteCandle> liveCandles
 });
 
 
@@ -272,11 +280,12 @@ class __$MarketStateCopyWithImpl<$Res>
 
 /// Create a copy of MarketState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? stocks = null,Object? candles = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stocks = null,Object? candles = null,Object? liveCandles = null,}) {
   return _then(_MarketState(
 stocks: null == stocks ? _self._stocks : stocks // ignore: cast_nullable_to_non_nullable
 as List<StockModel>,candles: null == candles ? _self._candles : candles // ignore: cast_nullable_to_non_nullable
-as Map<String, List<MinuteCandle>>,
+as Map<String, List<MinuteCandle>>,liveCandles: null == liveCandles ? _self._liveCandles : liveCandles // ignore: cast_nullable_to_non_nullable
+as Map<String, MinuteCandle>,
   ));
 }
 

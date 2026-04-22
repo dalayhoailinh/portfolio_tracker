@@ -10,8 +10,9 @@ abstract class MarketState with _$MarketState {
   const factory MarketState({
     required List<StockModel> stocks,
     required Map<String, List<MinuteCandle>> candles,
+    required Map<String, MinuteCandle> liveCandles,
   }) = _MarketState;
 
   factory MarketState.initial() =>
-      const MarketState(stocks: kSeedStocks, candles: {});
+      const MarketState(stocks: kSeedStocks, candles: {}, liveCandles: {});
 }

@@ -46,13 +46,18 @@ class MarketTickEngine {
   final Map<String, _TickBuffer> _buffers = {};
   Map<String, double> _currentPrices = {};
 
-  void Function(Map<String, double>)? _onTick;
+  void Function(
+    Map<String, double> prices,
+    Map<String, MinuteCandle> liveCandles,
+  )?
+  _onTick;
   void Function(String symbol, MinuteCandle candle)? _onCandleClose;
   int Function(String symbol)? _candleIndexResolver;
 
   void start({
     required Map<String, double> initialPrices,
-    required void Function(Map<String, double>) onTick,
+    required void Function(Map<String, double>, Map<String, MinuteCandle>)
+    onTick,
     required void Function(String symbol, MinuteCandle candle) onCandleClose,
     required int Function(String symbol) candleIndexResolver,
   }) {
@@ -70,6 +75,7 @@ class MarketTickEngine {
   }
 
   void _handleTick(Timer _) {
+    final liveCandles = <String, MinuteCandle>{};
     for (final symbol in _currentPrices.keys) {
       final current = _currentPrices[symbol]!;
       final change = (_random.nextDouble() - 0.5) * 0.02;
@@ -79,9 +85,18 @@ class MarketTickEngine {
       );
       _currentPrices[symbol] = newPrice;
       _buffers[symbol]?.update(newPrice);
+
+      final index = _candleIndexResolver?.call(symbol) ?? 0;
+      liveCandles[symbol] = _buffers[symbol]!.toCandle(index);
     }
 
-    _onTick?.call(Map.of(_currentPrices));
+    _onTick?.call(Map.of(_currentPrices), liveCandles);
+
+    for (final symbol in _buffers.keys) {
+      final buffer = _buffers[symbol]!;
+      final index = _candleIndexResolver?.call(symbol) ?? 0;
+      liveCandles[symbol] = buffer.toCandle(index);
+    }
 
     _tickCount++;
     if (_tickCount >= kTicksPerMinute) {

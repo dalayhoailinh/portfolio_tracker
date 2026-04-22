@@ -41,7 +41,10 @@ class MarketNotifier extends StateNotifier<MarketState> {
     );
   }
 
-  void _onTick(Map<String, double> prices) {
+  void _onTick(
+    Map<String, double> prices,
+    Map<String, MinuteCandle> liveCandles,
+  ) {
     final updatedStocks = state.stocks.map((s) {
       final newPrice = prices[s.symbol];
       if (newPrice == null) return s;
@@ -53,7 +56,7 @@ class MarketNotifier extends StateNotifier<MarketState> {
       );
     }).toList();
 
-    state = state.copyWith(stocks: updatedStocks);
+    state = state.copyWith(stocks: updatedStocks, liveCandles: liveCandles);
   }
 
   void _onCandleClose(String symbol, MinuteCandle candle) {
