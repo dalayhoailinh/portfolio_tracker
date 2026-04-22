@@ -30,7 +30,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(path: '/add', builder: (context, state) => const AddStockPage()),
-      GoRoute(path: '/chart', builder: (context, state) => const ChartPage()),
+      GoRoute(
+        path: '/chart/:symbol',
+        builder: (context, state) {
+          final symbol = state.pathParameters['symbol']!;
+          return ChartPage(symbol: symbol);
+        },
+      ),
     ],
   );
 });
