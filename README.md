@@ -21,3 +21,12 @@ Portfolio Tracker is a Flutter app that allows users to track their stock portfo
 - Added portfolio `totalEquity` and `unrealizedPnL` support.
 - Fixed Home page to show true Equity and Unrealized PnL values.
 - Added reset portfolio and reset market actions.
+## Guide 4 Summary
+- Added Position Freezed entity with cost and PnL getters.
+- Added trading exceptions for cash, quantity, and position validation.
+- Updated PortfolioState to carry a positions map and corrected totalEquity formula.
+- Updated PortfolioNotifier with buy and withdraw methods and a live market listener for unrealized PnL.
+- Added PositionTile widget and a position list section on Home.
+- Built Add Stock page with search, select, and buy flow.
+- Built Withdraw bottom sheet with quantity validation.
+- Verified live PnL updates every 1 second and full persistence across app restart.
