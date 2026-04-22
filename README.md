@@ -30,3 +30,13 @@ Portfolio Tracker is a Flutter app that allows users to track their stock portfo
 - Built Add Stock page with search, select, and buy flow.
 - Built Withdraw bottom sheet with quantity validation.
 - Verified live PnL updates every 1 second and full persistence across app restart.
+## Guide 5 Summary
+- Added CandleAggregator service that groups m1 candles into m5, m15, m30, and h1 buckets using timeframe multiplier.
+- Added aggregatedCandlesProvider (Provider.family) that watches marketProvider and exposes live aggregated candles by symbol + timeframe.
+- Added CandlestickPainter with 5-line grid, right-axis price labels, padded price range, and green/red bodies and wicks.
+- Added CandlestickChart wrapper with LayoutBuilder, RepaintBoundary, and a friendly empty state.
+- Added TimeframeSelector chip bar for m1, m5, m15, m30, h1.
+- Upgraded ChartPage into a ConsumerStatefulWidget that accepts a symbol path parameter, reads live price from marketProvider, and lets the user switch timeframes with local state.
+- Updated router to use /chart/:symbol path parameter.
+- Wired Home market list tiles to push to /chart/:symbol on tap.
+- Verified timeframe switching, live candle updates, candle close, and persistence across app restart.
