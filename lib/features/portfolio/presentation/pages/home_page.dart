@@ -9,6 +9,7 @@ import '../../../market/data/providers/market_notifier.dart';
 import '../../data/providers/portfolio_notifier.dart';
 import '../widgets/portfolio_summary_card.dart';
 import '../widgets/position_tile.dart';
+import '../widgets/withdraw_sheet.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -78,7 +79,11 @@ class HomePage extends ConsumerWidget {
                   position: pos,
                   currentPrice: stock.price,
                   onTap: () {
-                    // TODO: open withdraw sheet
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) => WithdrawSheet(position: pos),
+                    );
                   },
                 );
               }),
