@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/providers/market_notifier.dart';
 import '../widgets/stock_tile.dart';
@@ -27,7 +28,12 @@ class MarketPage extends ConsumerWidget {
           itemCount: marketState.stocks.length,
           itemBuilder: (context, index) {
             final stock = marketState.stocks[index];
-            return StockTile(stock: stock);
+            return StockTile(
+              stock: stock,
+              onTap: () {
+                context.push('/chart');
+              },
+            );
           },
         ),
       ),
