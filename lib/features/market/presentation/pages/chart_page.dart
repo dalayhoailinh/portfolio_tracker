@@ -33,7 +33,7 @@ class _ChartPageState extends ConsumerState<ChartPage> {
       orElse: () => marketState.stocks.first,
     );
     final currentPrice = stock.price;
-    final isPositive = stock.changePercent >= 0;
+    final isPositive = stock.changePercent > 0;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -124,13 +124,6 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                           label: 'Down (close < open)',
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      'Each candle represents one ${_selected.label} period.\n'
-                      'Body = range between Open and Close.\n'
-                      'Wick = High and Low of the period.',
-                      style: AppTextStyles.bodySmall,
                     ),
                   ],
                 ),
