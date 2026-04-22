@@ -29,7 +29,7 @@ class CandlestickChart extends StatelessWidget {
               Text('Collecting candles...', style: AppTextStyles.bodyMedium),
               SizedBox(height: 4),
               Text(
-                'A new m1 candle will be added every minute.',
+                'The live m1 candle updates every second',
                 style: AppTextStyles.bodySmall,
               ),
             ],
