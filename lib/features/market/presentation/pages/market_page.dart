@@ -31,7 +31,7 @@ class MarketPage extends ConsumerWidget {
             return StockTile(
               stock: stock,
               onTap: () {
-                context.push('/chart');
+                context.push('/chart/${stock.symbol}');
               },
             );
           },
