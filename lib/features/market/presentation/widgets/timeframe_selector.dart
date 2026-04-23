@@ -22,10 +22,12 @@ class TimeframeSelector extends StatelessWidget {
         children: MarketTimeframe.values.map((tf) {
           final isSelected = tf == selected;
           return Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 8),
             child: GestureDetector(
               onTap: () => onChanged(tf),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 180),
+                curve: Curves.easeOut,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 6,
@@ -36,8 +38,8 @@ class TimeframeSelector extends StatelessWidget {
                       : AppColors.surfaceLight,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  tf.label,
+                child: AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 180),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
@@ -45,6 +47,7 @@ class TimeframeSelector extends StatelessWidget {
                         ? AppColors.textPrimary
                         : AppColors.textSecondary,
                   ),
+                  child: Text(tf.label),
                 ),
               ),
             ),

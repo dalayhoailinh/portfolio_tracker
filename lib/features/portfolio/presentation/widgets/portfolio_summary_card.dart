@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
+import '../../../../core/widgets/animations/animated_number_text.dart';
 import '../../domain/entities/portfolio_state.dart';
 import 'summary_item.dart';
 
@@ -39,15 +40,21 @@ class PortfolioSummaryCard extends StatelessWidget {
               Expanded(
                 child: SummaryItem(
                   label: 'Cash',
-                  value: '\$${portfolioState.cash.toStringAsFixed(2)}',
-                  valueStyle: AppTextStyles.titleSmall,
+                  valueWidget: AnimatedNumberText(
+                    value: portfolioState.cash,
+                    prefix: '\$',
+                    style: AppTextStyles.titleSmall,
+                  ),
                 ),
               ),
               Expanded(
                 child: SummaryItem(
                   label: 'Equity',
-                  value: '\$${portfolioState.totalEquity.toStringAsFixed(2)}',
-                  valueStyle: AppTextStyles.titleSmall,
+                  valueWidget: AnimatedNumberText(
+                    value: portfolioState.totalEquity,
+                    prefix: '\$',
+                    style: AppTextStyles.titleSmall,
+                  ),
                 ),
               ),
             ],
@@ -58,19 +65,25 @@ class PortfolioSummaryCard extends StatelessWidget {
               Expanded(
                 child: SummaryItem(
                   label: 'Realized PnL',
-                  value: '\$${portfolioState.realizedPnL.toStringAsFixed(2)}',
-                  valueStyle: portfolioState.realizedPnL >= 0
-                      ? AppTextStyles.labelPositive
-                      : AppTextStyles.labelNegative,
+                  valueWidget: AnimatedNumberText(
+                    value: portfolioState.realizedPnL,
+                    prefix: '\$',
+                    style: portfolioState.realizedPnL >= 0
+                        ? AppTextStyles.labelPositive
+                        : AppTextStyles.labelNegative,
+                  ),
                 ),
               ),
               Expanded(
                 child: SummaryItem(
                   label: 'Unrealized PnL',
-                  value: '\$${portfolioState.unrealizedPnL.toStringAsFixed(2)}',
-                  valueStyle: portfolioState.unrealizedPnL >= 0
-                      ? AppTextStyles.labelPositive
-                      : AppTextStyles.labelNegative,
+                  valueWidget: AnimatedNumberText(
+                    value: portfolioState.unrealizedPnL,
+                    prefix: '\$',
+                    style: portfolioState.unrealizedPnL >= 0
+                        ? AppTextStyles.labelPositive
+                        : AppTextStyles.labelNegative,
+                  ),
                 ),
               ),
             ],

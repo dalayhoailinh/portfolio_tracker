@@ -40,3 +40,12 @@ Portfolio Tracker is a Flutter app that allows users to track their stock portfo
 - Updated router to use /chart/:symbol path parameter.
 - Wired Home market list tiles to push to /chart/:symbol on tap.
 - Verified timeframe switching, live candle updates, candle close, and persistence across app restart.
+## Guide 6 Summary
+- Added shared animation widgets under core/widgets/animations: PriceFlash, AnimatedNumberText, AnimatedPnlText, LivePulse.
+- Added green/red flash behind stock prices on every tick and smooth number tweening in StockTile.
+- Replaced static PnL and equity text in PortfolioSummaryCard and PositionTile with AnimatedNumberText + AnimatedPnlText for smooth value tween and color fade on sign flip.
+- Added PositionListEntry wrapper + AnimatedSize + AnimatedSwitcher so new positions slide in and removed positions fade out.
+- Added AnimatedContainer + AnimatedDefaultTextStyle to TimeframeSelector for smooth chip color and weight transitions.
+- Wrapped CandlestickChart in AnimatedSwitcher keyed by timeframe for a clean 250ms crossfade on timeframe switch.
+- Added LivePulse dot next to the price in the chart header for a breathing live indicator.
+- Verified flash does not stack on 1-second ticks and crossfade does not run on candle close.

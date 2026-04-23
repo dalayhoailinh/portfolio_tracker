@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
+import '../../../../core/widgets/animations/animated_number_text.dart';
+import '../../../../core/widgets/animations/price_flash.dart';
 import '../../domain/entities/stock_model.dart';
 
 class StockTile extends StatelessWidget {
@@ -36,21 +38,27 @@ class StockTile extends StatelessWidget {
                 Text(stock.name, style: AppTextStyles.bodySmall),
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  '\$${stock.price.toStringAsFixed(2)}',
-                  style: AppTextStyles.titleSmall,
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  '$prefix${stock.changePercent.toStringAsFixed(2)}%',
-                  style: isPositive
-                      ? AppTextStyles.labelPositive
-                      : AppTextStyles.labelNegative,
-                ),
-              ],
+            PriceFlash(
+              value: stock.price,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  AnimatedNumberText(
+                    value: stock.price,
+                    prefix: '\$',
+                    style: AppTextStyles.titleSmall,
+                  ),
+                  const SizedBox(height: 2),
+                  AnimatedNumberText(
+                    value: stock.changePercent,
+                    prefix: prefix,
+                    suffix: '%',
+                    style: isPositive
+                        ? AppTextStyles.labelPositive
+                        : AppTextStyles.labelNegative,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

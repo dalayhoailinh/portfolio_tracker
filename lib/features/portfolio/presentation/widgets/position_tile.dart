@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
+import '../../../../core/widgets/animations/animated_number_text.dart';
+import '../../../../core/widgets/animations/animated_pnl_text.dart';
 import '../../../market/domain/entities/position.dart';
 
 class PositionTile extends StatelessWidget {
@@ -52,18 +54,13 @@ class PositionTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  '\$${position.marketValue(currentPrice).toStringAsFixed(2)}',
+                AnimatedNumberText(
+                  value: position.marketValue(currentPrice),
+                  prefix: '\$',
                   style: AppTextStyles.titleSmall,
                 ),
                 const SizedBox(height: 2),
-                Text(
-                  '$prefix\$${pnl.toStringAsFixed(2)} '
-                  '($prefix${pnlPercent.toStringAsFixed(2)}%)',
-                  style: isPositive
-                      ? AppTextStyles.labelPositive
-                      : AppTextStyles.labelNegative,
-                ),
+                AnimatedPnlText(value: pnl, percent: pnlPercent),
               ],
             ),
           ],

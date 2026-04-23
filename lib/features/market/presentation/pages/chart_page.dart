@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
+import '../../../../core/widgets/animations/live_pulse.dart';
 import '../../data/providers/aggregated_candles_provider.dart';
 import '../../data/providers/market_notifier.dart';
 import '../../domain/entities/market_timeframe.dart';
@@ -91,8 +92,10 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                   children: [
                     Row(
                       children: [
+                        Text('Live ', style: AppTextStyles.titleSmall),
+                        LivePulse(),
                         Text(
-                          'Live · ${_selected.label}',
+                          ' ${_selected.label}',
                           style: AppTextStyles.titleSmall,
                         ),
                         const Spacer(),
@@ -109,7 +112,15 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.fromLTRB(12, 12, 4, 12),
-                      child: CandlestickChart(candles: candles),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        switchInCurve: Curves.easeOut,
+                        switchOutCurve: Curves.easeIn,
+                        child: CandlestickChart(
+                          key: ValueKey(_selected),
+                          candles: candles,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Row(

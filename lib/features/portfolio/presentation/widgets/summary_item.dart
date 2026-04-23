@@ -4,14 +4,12 @@ import '../../../../core/constants/app_text_styles.dart';
 
 class SummaryItem extends StatelessWidget {
   final String label;
-  final String value;
-  final TextStyle valueStyle;
+  final Widget valueWidget;
 
   const SummaryItem({
     super.key,
     required this.label,
-    required this.value,
-    required this.valueStyle,
+    required this.valueWidget,
   });
 
   @override
@@ -21,7 +19,7 @@ class SummaryItem extends StatelessWidget {
       children: [
         Text(label, style: AppTextStyles.bodySmall),
         const SizedBox(height: 4),
-        Text(value, style: valueStyle),
+        valueWidget,
       ],
     );
   }
