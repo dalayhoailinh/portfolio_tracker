@@ -46,7 +46,11 @@ class MarketTickEngine {
   Timer? _alignmentTimer;
   Timer? _candleTimer;
 
-  void Function(Map<String, double> prices)? _onTick;
+  void Function(
+    Map<String, double> prices,
+    Map<String, MinuteCandle> liveCandles,
+  )?
+  _onTick;
   void Function(String symbol, MinuteCandle candle)? _onCandleClose;
   int Function(String symbol)? _candleIndexResolver;
 
@@ -80,7 +84,8 @@ class MarketTickEngine {
 
   void start({
     required Map<String, double> initialPrices,
-    required void Function(Map<String, double>) onTick,
+    required void Function(Map<String, double>, Map<String, MinuteCandle>)
+    onTick,
     required void Function(String symbol, MinuteCandle candle) onCandleClose,
     required int Function(String symbol) candleIndexResolver,
   }) {
@@ -116,7 +121,12 @@ class MarketTickEngine {
     _currentPrices[symbol] = price;
     _buffers[symbol]?.update(price);
 
-    _onTick?.call(Map.of(_currentPrices));
+    final liveCandles = <String, MinuteCandle>{};
+    for (final sym in _currentPrices.keys) {
+      final index = _candleIndexResolver?.call(sym) ?? 0;
+      liveCandles[sym] = _buffers[sym]!.toCandle(index);
+    }
+    _onTick?.call(Map.of(_currentPrices), liveCandles);
   }
 
   void _closeCandles() {

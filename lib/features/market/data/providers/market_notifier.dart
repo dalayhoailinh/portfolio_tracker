@@ -47,13 +47,10 @@ class MarketNotifier extends StateNotifier<MarketState> {
   ) {
     final updatedStocks = state.stocks.map((s) {
       final newPrice = prices[s.symbol];
-      if (newPrice == null) return s;
+      if (newPrice == null || newPrice == s.price) return s;
 
       final changePercent = ((newPrice - s.price) / s.price) * 100;
-      return s.copyWith(
-        price: double.parse(newPrice.toStringAsFixed(2)),
-        changePercent: double.parse(changePercent.toStringAsFixed(2)),
-      );
+      return s.copyWith(price: newPrice, changePercent: changePercent);
     }).toList();
 
     state = state.copyWith(stocks: updatedStocks, liveCandles: liveCandles);
