@@ -22,8 +22,6 @@ class PositionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final pnl = position.unrealizedPnl(currentPrice);
     final pnlPercent = position.unrealizedPnlPercent(currentPrice);
-    final isPositive = pnl > 0;
-    final prefix = isPositive ? '+' : '';
 
     return InkWell(
       onTap: onTap,
