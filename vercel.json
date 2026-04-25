@@ -1,0 +1,12 @@
+{
+    "buildCommand": "flutter build web --release --no-tree-shake-icons",
+    "outputDirectory": "build/web",
+    "installCommand": "git clone --depth 1 https://github.com/flutter/flutter.git && cd flutter && git checkout 3.41.5git clone --depth 1 https://github.com/flutter/flutter.git -b stable $HOME/flutter && export PATH=\"$PATH:$HOME/flutter/bin\" && flutter doctor && flutter pub get && dart run build_runner build --delete-conflicting-outputs",
+    "framework": null,
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}
