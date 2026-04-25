@@ -49,7 +49,7 @@ class MarketNotifier extends StateNotifier<MarketState> {
       final newPrice = prices[s.symbol];
       if (newPrice == null || newPrice == s.price) return s;
 
-      final changePercent = ((newPrice - s.price) / s.price) * 100;
+      final changePercent = ((newPrice - s.seedPrice) / s.seedPrice) * 100;
       return s.copyWith(price: newPrice, changePercent: changePercent);
     }).toList();
 

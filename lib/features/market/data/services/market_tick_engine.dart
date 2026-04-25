@@ -66,7 +66,7 @@ class MarketTickEngine {
     final u1 = _random.nextDouble();
     final u2 = _random.nextDouble();
     final t = (u1 + u2) / 2;
-    return (t - 0.5) * 2;
+    return (t - 0.5) * 0.2;
   }
 
   Stream<double> _stockTickStream(double initialPrice) async* {
