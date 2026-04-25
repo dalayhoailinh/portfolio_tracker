@@ -31,7 +31,7 @@ class PortfolioSummaryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text('Portfolio Summary', style: AppTextStyles.titleMedium),
-              TextButton(onPressed: onPressed, child: Text('Reset')),
+              TextButton(onPressed: onPressed, child: const Text('Reset')),
             ],
           ),
           const SizedBox(height: 14),

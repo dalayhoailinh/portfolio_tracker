@@ -28,13 +28,13 @@ class LoginPage extends ConsumerWidget {
                 color: AppColors.primary,
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 'Welcome to',
                 textAlign: TextAlign.center,
                 style: AppTextStyles.titleLarge,
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Portfolio Tracker',
                 textAlign: TextAlign.center,
                 style: AppTextStyles.displayLarge,
@@ -76,7 +76,7 @@ class LoginPage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
+              const Text(
                 'This is a demo login. No authentication is required.',
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmall,

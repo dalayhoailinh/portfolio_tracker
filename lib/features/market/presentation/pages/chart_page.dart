@@ -92,8 +92,8 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                   children: [
                     Row(
                       children: [
-                        Text('Live ', style: AppTextStyles.titleSmall),
-                        LivePulse(),
+                        const Text('Live ', style: AppTextStyles.titleSmall),
+                        const LivePulse(),
                         Text(
                           ' ${_selected.label}',
                           style: AppTextStyles.titleSmall,
@@ -123,8 +123,8 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      children: const [
+                    const Row(
+                      children: [
                         _LegendItem(
                           color: AppColors.positiveGain,
                           label: 'Up (close >= open)',
