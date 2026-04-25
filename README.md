@@ -1,51 +1,104 @@
 # Portfolio Tracker
+
+[![Flutter CI](https://github.com/dalayhoailinh/portfolio_tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/dalayhoailinh/portfolio_tracker/actions/workflows/ci.yml)
+
+A Flutter mini-trading app with fake real-time market data, buy/withdraw flow, live PnL, multi-timeframe candlestick chart, and full local persistence. Built across one week as the Q1 Week 12 checkpoint of the 2026 roadmap.
+
+**Live demo:** https://portfoliotracker-dusky.vercel.app
+
+
 ## Overview
-Portfolio Tracker is a Flutter app that allows users to track their stock portfolio performance. Users can add stocks, view their portfolio value, and see performance charts.
-## Guide 1 Summary
-- Set up Flutter project and installed GoRouter.
-- Created color palette and typography definitions.
-- Created empty screens for Login, Home, Add Stock, and Chart.
-- Configured GoRouter for basic navigation between screens.
-## Guide 2 Summary
-- Implemented authentication state management using Riverpod.
-- Created AuthState enum to represent authentication states.
-- Created AuthNotifier to manage authentication state and provide login/logout methods.
-- Created RouterNotifier to handle route redirection based on authentication state.
-- Updated router to use RouterNotifier for redirection, app with routerProvider and main with ProviderScope.
-- Updated Login Page with login button that calls AuthNotifier login method and Home Page with logout button
-## Guide 3 Summary
-- Added Freezed models for stock, m1 candle, and portfolio state.
-- Added MarketTimeframe enum (m1, m5, m15, m30, h1).
-- Added fake market tick engine and 60-tick candle close.
-- Added local persistence for market and portfolio state.
-- Added portfolio `totalEquity` and `unrealizedPnL` support.
-- Fixed Home page to show true Equity and Unrealized PnL values.
-- Added reset portfolio and reset market actions.
-## Guide 4 Summary
-- Added Position Freezed entity with cost and PnL getters.
-- Added trading exceptions for cash, quantity, and position validation.
-- Updated PortfolioState to carry a positions map and corrected totalEquity formula.
-- Updated PortfolioNotifier with buy and withdraw methods and a live market listener for unrealized PnL.
-- Added PositionTile widget and a position list section on Home.
-- Built Add Stock page with search, select, and buy flow.
-- Built Withdraw bottom sheet with quantity validation.
-- Verified live PnL updates every 1 second and full persistence across app restart.
-## Guide 5 Summary
-- Added CandleAggregator service that groups m1 candles into m5, m15, m30, and h1 buckets using timeframe multiplier.
-- Added aggregatedCandlesProvider (Provider.family) that watches marketProvider and exposes live aggregated candles by symbol + timeframe.
-- Added CandlestickPainter with 5-line grid, right-axis price labels, padded price range, and green/red bodies and wicks.
-- Added CandlestickChart wrapper with LayoutBuilder, RepaintBoundary, and a friendly empty state.
-- Added TimeframeSelector chip bar for m1, m5, m15, m30, h1.
-- Upgraded ChartPage into a ConsumerStatefulWidget that accepts a symbol path parameter, reads live price from marketProvider, and lets the user switch timeframes with local state.
-- Updated router to use /chart/:symbol path parameter.
-- Wired Home market list tiles to push to /chart/:symbol on tap.
-- Verified timeframe switching, live candle updates, candle close, and persistence across app restart.
-## Guide 6 Summary
-- Added shared animation widgets under core/widgets/animations: PriceFlash, AnimatedNumberText, AnimatedPnlText, LivePulse.
-- Added green/red flash behind stock prices on every tick and smooth number tweening in StockTile.
-- Replaced static PnL and equity text in PortfolioSummaryCard and PositionTile with AnimatedNumberText + AnimatedPnlText for smooth value tween and color fade on sign flip.
-- Added PositionListEntry wrapper + AnimatedSize + AnimatedSwitcher so new positions slide in and removed positions fade out.
-- Added AnimatedContainer + AnimatedDefaultTextStyle to TimeframeSelector for smooth chip color and weight transitions.
-- Wrapped CandlestickChart in AnimatedSwitcher keyed by timeframe for a clean 250ms crossfade on timeframe switch.
-- Added LivePulse dot next to the price in the chart header for a breathing live indicator.
-- Verified flash does not stack on 1-second ticks and crossfade does not run on candle close.
+
+Five fake stocks tick once per second. The user starts with $10,000 cash and can buy or withdraw any quantity at the current price. Every minute, one m1 candle is closed and persisted locally. The chart supports m1 / m5 / m15 / m30 / h1 timeframes rendered by a hand-built `CustomPainter`. Everything animates smoothly and survives an app restart.
+
+## Architecture
+
+\`\`\`
+lib/
+├── app/
+│   ├── app.dart           # MaterialApp.router + ProviderScope
+│   └── router.dart        # GoRouter with auth guard and chart deep link
+├── core/
+│   ├── constants/         # AppColors, AppTextStyles, AnimationConstants
+│   └── widgets/
+│       └── animations/    # PriceFlash, AnimatedNumberText, AnimatedPnlText, LivePulse
+└── features/
+    ├── auth/              # AuthState enum, AuthNotifier, RouterNotifier, LoginPage
+    ├── market/            # Stock/candle models, tick engine, aggregator, CustomPainter chart
+    └── portfolio/         # Position entity, trading exceptions, buy/withdraw flows, Home page
+\`\`\`
+
+## Features
+
+| Guide | Feature |
+|-------|---------|
+| 1     | Project setup, routing, theme, empty screens |
+| 2     | Auth flow with Riverpod + GoRouter redirect |
+| 3     | Fake tick engine, m1 candle storage, portfolio base state, reset actions |
+| 4     | Add Stock search/select/buy, withdraw sheet, live PnL recompute |
+| 5     | m1→m5/m15/m30/h1 aggregation, CustomPainter candlestick, timeframe chips |
+| 6     | Price flash, number tweens, position list slide-in/out, chart crossfade, live pulse |
+| 7     | Unit + widget tests, GitHub Actions CI, Vercel deploy, documentation |
+
+## Tech stack
+
+- Flutter 3.35 + Dart 3.11
+- Riverpod for state management
+- GoRouter for navigation and auth redirect
+- Freezed + json_serializable for immutable entities
+- SharedPreferences for local persistence
+- CustomPaint for chart rendering
+- Mockito + fake_async + flutter_test for the test suite
+- GitHub Actions for CI
+- Vercel for web hosting
+
+## Local setup
+
+\`\`\`bash
+git clone https://github.com/dalayhoailinh/portfolio_tracker.git
+cd portfolio_tracker
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+flutter run
+\`\`\`
+
+## Running tests
+
+\`\`\`bash
+flutter test
+flutter test --coverage
+\`\`\`
+
+## Build web
+
+\`\`\`bash
+flutter build web --release --wasm --no-tree-shake-icons
+\`\`\`
+
+The output lands in `build/web/`. Any static host will serve it.
+
+## Guide summaries
+
+### Guide 1 - Project setup
+- Flutter project, GoRouter, AppColors / AppTextStyles, empty screens, base navigation.
+
+### Guide 2 - Authentication
+- AuthState enum, AuthNotifier, RouterNotifier, auth-aware redirect, demo login/logout flow.
+
+### Guide 3 - Market engine and persistence
+- Freezed Stock / MinuteCandle, MarketTimeframe enum, 1-second tick engine, 60-tick candle close, local storage for market and portfolio state, reset actions.
+
+### Guide 4 - Trading flow
+- Position entity with cost / PnL getters, trading exceptions, buy and withdraw with validation, PortfolioNotifier listening to MarketNotifier for live unrealized PnL, Add Stock page, Withdraw bottom sheet.
+
+### Guide 5 - Chart pipeline
+- CandleAggregator for m1 → higher timeframes, aggregatedCandlesProvider.family, CustomPainter candlestick with grid and right-axis price labels, TimeframeSelector chips, live-updating ChartPage.
+
+### Guide 6 - Realtime animation and polish
+- Shared animation widgets (PriceFlash, AnimatedNumberText, AnimatedPnlText, LivePulse), flash on tick, number tweens, position slide-in/out, timeframe chip transitions, chart crossfade.
+
+### Guide 7 - Tests, CI, and web deploy
+- 20+ unit and widget tests for entities, aggregator, trading flow, and Add Stock / Withdraw UIs.
+- GitHub Actions workflow: analyze → test → web build.
+- Vercel deployment with SPA rewrites for GoRouter deep links.
+- Finalized README with architecture, features, local setup, and guide summaries.
