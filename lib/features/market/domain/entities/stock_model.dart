@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'stock_model.freezed.dart';
-part 'stock_model.g.dart';
 
 @freezed
 abstract class StockModel with _$StockModel {
@@ -12,9 +11,6 @@ abstract class StockModel with _$StockModel {
     required double seedPrice,
     @Default(0.0) double changePercent,
   }) = _StockModel;
-
-  factory StockModel.fromJson(Map<String, dynamic> json) =>
-      _$StockModelFromJson(json);
 }
 
 const List<StockModel> kSeedStocks = [

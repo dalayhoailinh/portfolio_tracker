@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:portfolio_tracker/features/market/domain/entities/position.dart';
+import 'package:portfolio_tracker/features/portfolio/domain/entities/position.dart';
 
 void main() {
   group('Position', () {

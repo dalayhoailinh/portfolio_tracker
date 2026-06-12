@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'portfolio_state.dart';
+part of 'portfolio_state_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -11,41 +11,44 @@ part of 'portfolio_state.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-/// @nodoc
-mixin _$PortfolioState {
 
- double get cash; double get realizedPnL; double get unrealizedPnL; Map<String, Position> get positions;
-/// Create a copy of PortfolioState
+/// @nodoc
+mixin _$PortfolioStateDto {
+
+ double get cash; double get realizedPnL; double get unrealizedPnL; Map<String, PositionDto> get positions;
+/// Create a copy of PortfolioStateDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PortfolioStateCopyWith<PortfolioState> get copyWith => _$PortfolioStateCopyWithImpl<PortfolioState>(this as PortfolioState, _$identity);
+$PortfolioStateDtoCopyWith<PortfolioStateDto> get copyWith => _$PortfolioStateDtoCopyWithImpl<PortfolioStateDto>(this as PortfolioStateDto, _$identity);
 
+  /// Serializes this PortfolioStateDto to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PortfolioState&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.realizedPnL, realizedPnL) || other.realizedPnL == realizedPnL)&&(identical(other.unrealizedPnL, unrealizedPnL) || other.unrealizedPnL == unrealizedPnL)&&const DeepCollectionEquality().equals(other.positions, positions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PortfolioStateDto&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.realizedPnL, realizedPnL) || other.realizedPnL == realizedPnL)&&(identical(other.unrealizedPnL, unrealizedPnL) || other.unrealizedPnL == unrealizedPnL)&&const DeepCollectionEquality().equals(other.positions, positions));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,cash,realizedPnL,unrealizedPnL,const DeepCollectionEquality().hash(positions));
 
 @override
 String toString() {
-  return 'PortfolioState(cash: $cash, realizedPnL: $realizedPnL, unrealizedPnL: $unrealizedPnL, positions: $positions)';
+  return 'PortfolioStateDto(cash: $cash, realizedPnL: $realizedPnL, unrealizedPnL: $unrealizedPnL, positions: $positions)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PortfolioStateCopyWith<$Res>  {
-  factory $PortfolioStateCopyWith(PortfolioState value, $Res Function(PortfolioState) _then) = _$PortfolioStateCopyWithImpl;
+abstract mixin class $PortfolioStateDtoCopyWith<$Res>  {
+  factory $PortfolioStateDtoCopyWith(PortfolioStateDto value, $Res Function(PortfolioStateDto) _then) = _$PortfolioStateDtoCopyWithImpl;
 @useResult
 $Res call({
- double cash, double realizedPnL, double unrealizedPnL, Map<String, Position> positions
+ double cash, double realizedPnL, double unrealizedPnL, Map<String, PositionDto> positions
 });
 
 
@@ -53,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$PortfolioStateCopyWithImpl<$Res>
-    implements $PortfolioStateCopyWith<$Res> {
-  _$PortfolioStateCopyWithImpl(this._self, this._then);
+class _$PortfolioStateDtoCopyWithImpl<$Res>
+    implements $PortfolioStateDtoCopyWith<$Res> {
+  _$PortfolioStateDtoCopyWithImpl(this._self, this._then);
 
-  final PortfolioState _self;
-  final $Res Function(PortfolioState) _then;
+  final PortfolioStateDto _self;
+  final $Res Function(PortfolioStateDto) _then;
 
-/// Create a copy of PortfolioState
+/// Create a copy of PortfolioStateDto
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? cash = null,Object? realizedPnL = null,Object? unrealizedPnL = null,Object? positions = null,}) {
   return _then(_self.copyWith(
@@ -68,15 +71,15 @@ cash: null == cash ? _self.cash : cash // ignore: cast_nullable_to_non_nullable
 as double,realizedPnL: null == realizedPnL ? _self.realizedPnL : realizedPnL // ignore: cast_nullable_to_non_nullable
 as double,unrealizedPnL: null == unrealizedPnL ? _self.unrealizedPnL : unrealizedPnL // ignore: cast_nullable_to_non_nullable
 as double,positions: null == positions ? _self.positions : positions // ignore: cast_nullable_to_non_nullable
-as Map<String, Position>,
+as Map<String, PositionDto>,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [PortfolioState].
-extension PortfolioStatePatterns on PortfolioState {
+/// Adds pattern-matching-related methods to [PortfolioStateDto].
+extension PortfolioStateDtoPatterns on PortfolioStateDto {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -89,10 +92,10 @@ extension PortfolioStatePatterns on PortfolioState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PortfolioState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PortfolioStateDto value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _PortfolioState() when $default != null:
+case _PortfolioStateDto() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -111,10 +114,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PortfolioState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PortfolioStateDto value)  $default,){
 final _that = this;
 switch (_that) {
-case _PortfolioState():
+case _PortfolioStateDto():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -132,10 +135,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PortfolioState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PortfolioStateDto value)?  $default,){
 final _that = this;
 switch (_that) {
-case _PortfolioState() when $default != null:
+case _PortfolioStateDto() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -153,9 +156,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double cash,  double realizedPnL,  double unrealizedPnL,  Map<String, Position> positions)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double cash,  double realizedPnL,  double unrealizedPnL,  Map<String, PositionDto> positions)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _PortfolioState() when $default != null:
+case _PortfolioStateDto() when $default != null:
 return $default(_that.cash,_that.realizedPnL,_that.unrealizedPnL,_that.positions);case _:
   return orElse();
 
@@ -174,9 +177,9 @@ return $default(_that.cash,_that.realizedPnL,_that.unrealizedPnL,_that.positions
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double cash,  double realizedPnL,  double unrealizedPnL,  Map<String, Position> positions)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double cash,  double realizedPnL,  double unrealizedPnL,  Map<String, PositionDto> positions)  $default,) {final _that = this;
 switch (_that) {
-case _PortfolioState():
+case _PortfolioStateDto():
 return $default(_that.cash,_that.realizedPnL,_that.unrealizedPnL,_that.positions);case _:
   throw StateError('Unexpected subclass');
 
@@ -194,9 +197,9 @@ return $default(_that.cash,_that.realizedPnL,_that.unrealizedPnL,_that.positions
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double cash,  double realizedPnL,  double unrealizedPnL,  Map<String, Position> positions)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double cash,  double realizedPnL,  double unrealizedPnL,  Map<String, PositionDto> positions)?  $default,) {final _that = this;
 switch (_that) {
-case _PortfolioState() when $default != null:
+case _PortfolioStateDto() when $default != null:
 return $default(_that.cash,_that.realizedPnL,_that.unrealizedPnL,_that.positions);case _:
   return null;
 
@@ -206,54 +209,57 @@ return $default(_that.cash,_that.realizedPnL,_that.unrealizedPnL,_that.positions
 }
 
 /// @nodoc
+@JsonSerializable()
 
-
-class _PortfolioState extends PortfolioState {
-  const _PortfolioState({required this.cash, required this.realizedPnL, required this.unrealizedPnL, final  Map<String, Position> positions = const {}}): _positions = positions,super._();
-  
+class _PortfolioStateDto extends PortfolioStateDto {
+  const _PortfolioStateDto({required this.cash, required this.realizedPnL, required this.unrealizedPnL, final  Map<String, PositionDto> positions = const {}}): _positions = positions,super._();
+  factory _PortfolioStateDto.fromJson(Map<String, dynamic> json) => _$PortfolioStateDtoFromJson(json);
 
 @override final  double cash;
 @override final  double realizedPnL;
 @override final  double unrealizedPnL;
- final  Map<String, Position> _positions;
-@override@JsonKey() Map<String, Position> get positions {
+ final  Map<String, PositionDto> _positions;
+@override@JsonKey() Map<String, PositionDto> get positions {
   if (_positions is EqualUnmodifiableMapView) return _positions;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_positions);
 }
 
 
-/// Create a copy of PortfolioState
+/// Create a copy of PortfolioStateDto
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$PortfolioStateCopyWith<_PortfolioState> get copyWith => __$PortfolioStateCopyWithImpl<_PortfolioState>(this, _$identity);
+_$PortfolioStateDtoCopyWith<_PortfolioStateDto> get copyWith => __$PortfolioStateDtoCopyWithImpl<_PortfolioStateDto>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$PortfolioStateDtoToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PortfolioState&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.realizedPnL, realizedPnL) || other.realizedPnL == realizedPnL)&&(identical(other.unrealizedPnL, unrealizedPnL) || other.unrealizedPnL == unrealizedPnL)&&const DeepCollectionEquality().equals(other._positions, _positions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PortfolioStateDto&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.realizedPnL, realizedPnL) || other.realizedPnL == realizedPnL)&&(identical(other.unrealizedPnL, unrealizedPnL) || other.unrealizedPnL == unrealizedPnL)&&const DeepCollectionEquality().equals(other._positions, _positions));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,cash,realizedPnL,unrealizedPnL,const DeepCollectionEquality().hash(_positions));
 
 @override
 String toString() {
-  return 'PortfolioState(cash: $cash, realizedPnL: $realizedPnL, unrealizedPnL: $unrealizedPnL, positions: $positions)';
+  return 'PortfolioStateDto(cash: $cash, realizedPnL: $realizedPnL, unrealizedPnL: $unrealizedPnL, positions: $positions)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$PortfolioStateCopyWith<$Res> implements $PortfolioStateCopyWith<$Res> {
-  factory _$PortfolioStateCopyWith(_PortfolioState value, $Res Function(_PortfolioState) _then) = __$PortfolioStateCopyWithImpl;
+abstract mixin class _$PortfolioStateDtoCopyWith<$Res> implements $PortfolioStateDtoCopyWith<$Res> {
+  factory _$PortfolioStateDtoCopyWith(_PortfolioStateDto value, $Res Function(_PortfolioStateDto) _then) = __$PortfolioStateDtoCopyWithImpl;
 @override @useResult
 $Res call({
- double cash, double realizedPnL, double unrealizedPnL, Map<String, Position> positions
+ double cash, double realizedPnL, double unrealizedPnL, Map<String, PositionDto> positions
 });
 
 
@@ -261,22 +267,22 @@ $Res call({
 
 }
 /// @nodoc
-class __$PortfolioStateCopyWithImpl<$Res>
-    implements _$PortfolioStateCopyWith<$Res> {
-  __$PortfolioStateCopyWithImpl(this._self, this._then);
+class __$PortfolioStateDtoCopyWithImpl<$Res>
+    implements _$PortfolioStateDtoCopyWith<$Res> {
+  __$PortfolioStateDtoCopyWithImpl(this._self, this._then);
 
-  final _PortfolioState _self;
-  final $Res Function(_PortfolioState) _then;
+  final _PortfolioStateDto _self;
+  final $Res Function(_PortfolioStateDto) _then;
 
-/// Create a copy of PortfolioState
+/// Create a copy of PortfolioStateDto
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? cash = null,Object? realizedPnL = null,Object? unrealizedPnL = null,Object? positions = null,}) {
-  return _then(_PortfolioState(
+  return _then(_PortfolioStateDto(
 cash: null == cash ? _self.cash : cash // ignore: cast_nullable_to_non_nullable
 as double,realizedPnL: null == realizedPnL ? _self.realizedPnL : realizedPnL // ignore: cast_nullable_to_non_nullable
 as double,unrealizedPnL: null == unrealizedPnL ? _self.unrealizedPnL : unrealizedPnL // ignore: cast_nullable_to_non_nullable
 as double,positions: null == positions ? _self._positions : positions // ignore: cast_nullable_to_non_nullable
-as Map<String, Position>,
+as Map<String, PositionDto>,
   ));
 }
 

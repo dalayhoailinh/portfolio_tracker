@@ -3,15 +3,16 @@ import 'package:flutter_riverpod/legacy.dart';
 import '../../domain/entities/market_state.dart';
 import '../../domain/entities/minute_candle.dart';
 import '../../domain/entities/stock_model.dart';
+import '../../domain/repositories/i_market_repository.dart';
 import '../services/market_local_storage.dart';
 import '../services/market_tick_engine.dart';
 
 class MarketNotifier extends StateNotifier<MarketState> {
-  final MarketLocalStorage _storage;
+  final IMarketRepository _storage;
   final MarketTickEngine _engine;
 
   MarketNotifier({
-    required MarketLocalStorage storage,
+    required IMarketRepository storage,
     required MarketTickEngine engine,
   }) : _storage = storage,
        _engine = engine,

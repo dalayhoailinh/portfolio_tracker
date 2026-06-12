@@ -4,7 +4,7 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/widgets/animations/animated_number_text.dart';
 import '../../../../core/widgets/animations/animated_pnl_text.dart';
-import '../../../market/domain/entities/position.dart';
+import '../../domain/entities/position.dart';
 
 class PositionTile extends StatelessWidget {
   final Position position;

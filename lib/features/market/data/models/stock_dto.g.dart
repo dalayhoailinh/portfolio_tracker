@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'stock_model.dart';
+part of 'stock_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_StockModel _$StockModelFromJson(Map<String, dynamic> json) => _StockModel(
+_StockDto _$StockDtoFromJson(Map<String, dynamic> json) => _StockDto(
   symbol: json['symbol'] as String,
   name: json['name'] as String,
   price: (json['price'] as num).toDouble(),
@@ -14,11 +14,10 @@ _StockModel _$StockModelFromJson(Map<String, dynamic> json) => _StockModel(
   changePercent: (json['changePercent'] as num?)?.toDouble() ?? 0.0,
 );
 
-Map<String, dynamic> _$StockModelToJson(_StockModel instance) =>
-    <String, dynamic>{
-      'symbol': instance.symbol,
-      'name': instance.name,
-      'price': instance.price,
-      'seedPrice': instance.seedPrice,
-      'changePercent': instance.changePercent,
-    };
+Map<String, dynamic> _$StockDtoToJson(_StockDto instance) => <String, dynamic>{
+  'symbol': instance.symbol,
+  'name': instance.name,
+  'price': instance.price,
+  'seedPrice': instance.seedPrice,
+  'changePercent': instance.changePercent,
+};

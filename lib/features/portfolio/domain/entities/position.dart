@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'position.freezed.dart';
-part 'position.g.dart';
 
 @freezed
 abstract class Position with _$Position {
@@ -12,9 +11,6 @@ abstract class Position with _$Position {
     required double quantity,
     required double avgBuyPrice,
   }) = _Position;
-
-  factory Position.fromJson(Map<String, dynamic> json) =>
-      _$PositionFromJson(json);
 
   double get totalCost => quantity * avgBuyPrice;
 

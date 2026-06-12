@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'stock_model.dart';
+part of 'stock_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -11,38 +11,41 @@ part of 'stock_model.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
-mixin _$StockModel {
+mixin _$StockDto {
 
  String get symbol; String get name; double get price; double get seedPrice; double get changePercent;
-/// Create a copy of StockModel
+/// Create a copy of StockDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$StockModelCopyWith<StockModel> get copyWith => _$StockModelCopyWithImpl<StockModel>(this as StockModel, _$identity);
+$StockDtoCopyWith<StockDto> get copyWith => _$StockDtoCopyWithImpl<StockDto>(this as StockDto, _$identity);
 
+  /// Serializes this StockDto to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StockModel&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StockDto&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,symbol,name,price,seedPrice,changePercent);
 
 @override
 String toString() {
-  return 'StockModel(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice, changePercent: $changePercent)';
+  return 'StockDto(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice, changePercent: $changePercent)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $StockModelCopyWith<$Res>  {
-  factory $StockModelCopyWith(StockModel value, $Res Function(StockModel) _then) = _$StockModelCopyWithImpl;
+abstract mixin class $StockDtoCopyWith<$Res>  {
+  factory $StockDtoCopyWith(StockDto value, $Res Function(StockDto) _then) = _$StockDtoCopyWithImpl;
 @useResult
 $Res call({
  String symbol, String name, double price, double seedPrice, double changePercent
@@ -53,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$StockModelCopyWithImpl<$Res>
-    implements $StockModelCopyWith<$Res> {
-  _$StockModelCopyWithImpl(this._self, this._then);
+class _$StockDtoCopyWithImpl<$Res>
+    implements $StockDtoCopyWith<$Res> {
+  _$StockDtoCopyWithImpl(this._self, this._then);
 
-  final StockModel _self;
-  final $Res Function(StockModel) _then;
+  final StockDto _self;
+  final $Res Function(StockDto) _then;
 
-/// Create a copy of StockModel
+/// Create a copy of StockDto
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? symbol = null,Object? name = null,Object? price = null,Object? seedPrice = null,Object? changePercent = null,}) {
   return _then(_self.copyWith(
@@ -76,8 +79,8 @@ as double,
 }
 
 
-/// Adds pattern-matching-related methods to [StockModel].
-extension StockModelPatterns on StockModel {
+/// Adds pattern-matching-related methods to [StockDto].
+extension StockDtoPatterns on StockDto {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -90,10 +93,10 @@ extension StockModelPatterns on StockModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _StockModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _StockDto value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _StockModel() when $default != null:
+case _StockDto() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -112,10 +115,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _StockModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _StockDto value)  $default,){
 final _that = this;
 switch (_that) {
-case _StockModel():
+case _StockDto():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -133,10 +136,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _StockModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _StockDto value)?  $default,){
 final _that = this;
 switch (_that) {
-case _StockModel() when $default != null:
+case _StockDto() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -156,7 +159,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String symbol,  String name,  double price,  double seedPrice,  double changePercent)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _StockModel() when $default != null:
+case _StockDto() when $default != null:
 return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.changePercent);case _:
   return orElse();
 
@@ -177,7 +180,7 @@ return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.change
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String symbol,  String name,  double price,  double seedPrice,  double changePercent)  $default,) {final _that = this;
 switch (_that) {
-case _StockModel():
+case _StockDto():
 return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.changePercent);case _:
   throw StateError('Unexpected subclass');
 
@@ -197,7 +200,7 @@ return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.change
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String symbol,  String name,  double price,  double seedPrice,  double changePercent)?  $default,) {final _that = this;
 switch (_that) {
-case _StockModel() when $default != null:
+case _StockDto() when $default != null:
 return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.changePercent);case _:
   return null;
 
@@ -207,11 +210,11 @@ return $default(_that.symbol,_that.name,_that.price,_that.seedPrice,_that.change
 }
 
 /// @nodoc
+@JsonSerializable()
 
-
-class _StockModel implements StockModel {
-  const _StockModel({required this.symbol, required this.name, required this.price, required this.seedPrice, this.changePercent = 0.0});
-  
+class _StockDto extends StockDto {
+  const _StockDto({required this.symbol, required this.name, required this.price, required this.seedPrice, this.changePercent = 0.0}): super._();
+  factory _StockDto.fromJson(Map<String, dynamic> json) => _$StockDtoFromJson(json);
 
 @override final  String symbol;
 @override final  String name;
@@ -219,34 +222,37 @@ class _StockModel implements StockModel {
 @override final  double seedPrice;
 @override@JsonKey() final  double changePercent;
 
-/// Create a copy of StockModel
+/// Create a copy of StockDto
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$StockModelCopyWith<_StockModel> get copyWith => __$StockModelCopyWithImpl<_StockModel>(this, _$identity);
+_$StockDtoCopyWith<_StockDto> get copyWith => __$StockDtoCopyWithImpl<_StockDto>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$StockDtoToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StockModel&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StockDto&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.seedPrice, seedPrice) || other.seedPrice == seedPrice)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,symbol,name,price,seedPrice,changePercent);
 
 @override
 String toString() {
-  return 'StockModel(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice, changePercent: $changePercent)';
+  return 'StockDto(symbol: $symbol, name: $name, price: $price, seedPrice: $seedPrice, changePercent: $changePercent)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$StockModelCopyWith<$Res> implements $StockModelCopyWith<$Res> {
-  factory _$StockModelCopyWith(_StockModel value, $Res Function(_StockModel) _then) = __$StockModelCopyWithImpl;
+abstract mixin class _$StockDtoCopyWith<$Res> implements $StockDtoCopyWith<$Res> {
+  factory _$StockDtoCopyWith(_StockDto value, $Res Function(_StockDto) _then) = __$StockDtoCopyWithImpl;
 @override @useResult
 $Res call({
  String symbol, String name, double price, double seedPrice, double changePercent
@@ -257,17 +263,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$StockModelCopyWithImpl<$Res>
-    implements _$StockModelCopyWith<$Res> {
-  __$StockModelCopyWithImpl(this._self, this._then);
+class __$StockDtoCopyWithImpl<$Res>
+    implements _$StockDtoCopyWith<$Res> {
+  __$StockDtoCopyWithImpl(this._self, this._then);
 
-  final _StockModel _self;
-  final $Res Function(_StockModel) _then;
+  final _StockDto _self;
+  final $Res Function(_StockDto) _then;
 
-/// Create a copy of StockModel
+/// Create a copy of StockDto
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? symbol = null,Object? name = null,Object? price = null,Object? seedPrice = null,Object? changePercent = null,}) {
-  return _then(_StockModel(
+  return _then(_StockDto(
 symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
