@@ -3,6 +3,10 @@ import '../entities/portfolio_state.dart';
 import '../entities/position.dart';
 import '../entities/trading_exception.dart';
 
+double _money(double value) => double.parse(value.toStringAsFixed(2));
+
+double _avgPrice(double value) => double.parse(value.toStringAsFixed(4));
+
 class PortfolioService {
   PortfolioState recomputeUnrealizedPnl(
     PortfolioState state,
@@ -23,7 +27,7 @@ class PortfolioService {
       total += pos.unrealizedPnl(price);
     }
 
-    final rounded = double.parse(total.toStringAsFixed(2));
+    final rounded = _money(total);
     if (rounded != state.unrealizedPnL) {
       return state.copyWith(unrealizedPnL: rounded);
     }
@@ -52,12 +56,12 @@ class PortfolioService {
       final newAvg = (existing.totalCost + cost) / newQty;
       updatedPositions[stock.symbol] = existing.copyWith(
         quantity: newQty,
-        avgBuyPrice: double.parse(newAvg.toStringAsFixed(4)),
+        avgBuyPrice: _avgPrice(newAvg),
       );
     }
 
     return state.copyWith(
-      cash: double.parse((state.cash - cost).toStringAsFixed(2)),
+      cash: _money(state.cash - cost),
       positions: updatedPositions,
     );
   }
@@ -92,11 +96,9 @@ class PortfolioService {
     }
 
     return state.copyWith(
-      cash: double.parse((state.cash + proceeds).toStringAsFixed(2)),
+      cash: _money(state.cash + proceeds),
       positions: updatedPositions,
-      realizedPnL: double.parse(
-        (state.realizedPnL + realizedDelta).toStringAsFixed(2),
-      ),
+      realizedPnL: _money(state.realizedPnL + realizedDelta),
     );
   }
 }
