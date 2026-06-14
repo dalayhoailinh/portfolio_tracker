@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/auth/data/providers/router_notifier.dart';
 import '../features/auth/presentation/pages/login_page.dart';
+import '../features/market/presentation/pages/benchmark_page.dart';
 import '../features/market/presentation/pages/market_page.dart';
 import '../features/market/presentation/pages/chart_page.dart';
 import '../features/portfolio/presentation/pages/add_stock_page.dart';
@@ -30,6 +31,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(path: '/add', builder: (context, state) => const AddStockPage()),
+      GoRoute(
+        path: '/benchmark',
+        builder: (context, state) => const BenchmarkPage(),
+      ),
       GoRoute(
         path: '/chart/:symbol',
         builder: (context, state) {

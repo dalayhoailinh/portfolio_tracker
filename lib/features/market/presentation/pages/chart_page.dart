@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
@@ -54,7 +55,7 @@ class _ChartPageState extends ConsumerState<ChartPage> {
         backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
           icon: const Icon(
             Icons.arrow_back_rounded,
             color: AppColors.textPrimary,
@@ -68,6 +69,11 @@ class _ChartPageState extends ConsumerState<ChartPage> {
           ],
         ),
         actions: [
+          IconButton(
+            tooltip: 'Rust vs Dart benchmark',
+            onPressed: () => context.push('/benchmark'),
+            icon: const Icon(Icons.speed_rounded, color: AppColors.textPrimary),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: Column(
