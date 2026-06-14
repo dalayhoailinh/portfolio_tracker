@@ -7,8 +7,9 @@ import '../../domain/entities/minute_candle.dart';
 
 class CandlestickPainter extends CustomPainter {
   final List<MinuteCandle> data;
+  final List<double?>? sma;
 
-  const CandlestickPainter({required this.data});
+  const CandlestickPainter({required this.data, this.sma});
 
   static const double _rightAxisWidth = 64;
   static const double _paddingTop = 16;
@@ -104,10 +105,37 @@ class CandlestickPainter extends CustomPainter {
         bodyPaint,
       );
     }
+
+    final smaValue = sma;
+    if (smaValue != null) {
+      final smaPaint = Paint()
+        ..color = AppColors.smaLine
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round;
+
+      final path = Path();
+      var started = false;
+      final count = min(data.length, smaValue.length);
+
+      for (int i = 0; i < count; i++) {
+        final value = smaValue[i];
+        if (value == null) continue;
+        final x = i * columnWidth + columnWidth / 2;
+        final y = priceToY(value);
+        if (!started) {
+          path.moveTo(x, y);
+          started = true;
+        } else {
+          path.lineTo(x, y);
+        }
+      }
+      canvas.drawPath(path, smaPaint);
+    }
   }
 
   @override
   bool shouldRepaint(CandlestickPainter oldDelegate) {
-    return oldDelegate.data != data;
+    return oldDelegate.data != data || oldDelegate.sma != sma;
   }
 }

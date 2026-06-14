@@ -6,6 +6,7 @@ import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/widgets/animations/live_pulse.dart';
 import '../../data/providers/aggregated_candles_provider.dart';
 import '../../data/providers/market_notifier.dart';
+import '../../data/providers/sma_overlay_provider.dart';
 import '../../domain/entities/market_timeframe.dart';
 import '../widgets/candlestick_chart.dart';
 import '../widgets/timeframe_selector.dart';
@@ -21,12 +22,23 @@ class ChartPage extends ConsumerStatefulWidget {
 
 class _ChartPageState extends ConsumerState<ChartPage> {
   MarketTimeframe _selected = MarketTimeframe.m1;
+  static const int _smaWindow = 5;
 
   @override
   Widget build(BuildContext context) {
     final candles = ref.watch(
       aggregatedCandlesProvider((symbol: widget.symbol, timeframe: _selected)),
     );
+    final sma = ref
+        .watch(
+          smaOverlayProvider((
+            symbol: widget.symbol,
+            timeframe: _selected,
+            window: _smaWindow,
+          )),
+        )
+        .asData
+        ?.value;
 
     final marketState = ref.watch(marketProvider);
     final stock = marketState.stocks.firstWhere(
@@ -119,6 +131,7 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                         child: CandlestickChart(
                           key: ValueKey(_selected),
                           candles: candles,
+                          sma: sma,
                         ),
                       ),
                     ),
@@ -133,6 +146,11 @@ class _ChartPageState extends ConsumerState<ChartPage> {
                         _LegendItem(
                           color: AppColors.negativeGain,
                           label: 'Down (close < open)',
+                        ),
+                        SizedBox(width: 20),
+                        _LegendItem(
+                          color: AppColors.smaLine,
+                          label: 'SMA 5 (Rust)',
                         ),
                       ],
                     ),

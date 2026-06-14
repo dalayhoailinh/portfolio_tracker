@@ -7,9 +7,15 @@ import 'candlestick_painter.dart';
 
 class CandlestickChart extends StatelessWidget {
   final List<MinuteCandle> candles;
+  final List<double?>? sma;
   final double height;
 
-  const CandlestickChart({super.key, required this.candles, this.height = 280});
+  const CandlestickChart({
+    super.key,
+    required this.candles,
+    this.sma,
+    this.height = 280,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +51,7 @@ class CandlestickChart extends StatelessWidget {
           builder: (context, constraints) {
             return CustomPaint(
               size: Size(constraints.maxWidth, height),
-              painter: CandlestickPainter(data: candles),
+              painter: CandlestickPainter(data: candles, sma: sma),
               isComplex: true,
               willChange: true,
             );
