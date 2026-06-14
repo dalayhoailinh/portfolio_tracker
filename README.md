@@ -28,6 +28,34 @@ lib/
     └── portfolio/         # Position entity, trading exceptions, buy/withdraw flows, Home page
 \`\`\`
 
+## Rust engine (Q2 Tháng 4 checkpoint)
+
+Native indicator math now runs in Rust via `flutter_rust_bridge` v2.
+
+```
+presentation   ChartPage → smaOverlayProvider → CandlestickPainter
+domain         IIndicatorEngine (pure Dart contract)
+data           RustIndicatorEngine → lib/src/rust (generated) → rust/src/api
+               DartIndicatorEngine (web fallback + benchmark baseline)
+```
+
+- The bridge is hidden behind `IIndicatorEngine`. Exactly one file imports
+  generated bindings. UI and domain are FFI-free.
+- On web (Vercel) the app falls back to the Dart engine — no WASM build yet.
+- Per-tick scalar math (P&L, %change) stays in Dart **on purpose**: each
+  bridge call pays a fixed overhead, so only batch math earns its ticket
+  to Rust. Measured, not assumed:
+
+| Scenario (release, Windows desktop)        | Dart     | Rust      |
+|--------------------------------------------|----------|-----------|
+| SMA-20, 10,000 prices                      | 71 us    | 632 us    |
+| SMA-20, 100,000 prices                     | 4343 us  | 10344 us  |
+| 1,000 calls × 50 prices (same total work)  | 531 us   | 88712 us  |
+| 1 call × 50,000 prices (same total work)   | 983 us   | 3781 us   |
+
+Rule learned: **batch, not per-call** — move math across the bridge only
+when computation cost ≫ bridge overhead.
+
 ## Features
 
 | Guide | Feature |
