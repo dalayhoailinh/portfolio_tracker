@@ -70,6 +70,14 @@ class _ChartPageState extends ConsumerState<ChartPage> {
         ),
         actions: [
           IconButton(
+            tooltip: 'Real EODHD data',
+            onPressed: () => context.push('/real-chart/${stock.symbol}'),
+            icon: const Icon(
+              Icons.public_rounded,
+              color: AppColors.textPrimary,
+            ),
+          ),
+          IconButton(
             tooltip: 'Rust vs Dart benchmark',
             onPressed: () => context.push('/benchmark'),
             icon: const Icon(Icons.speed_rounded, color: AppColors.textPrimary),

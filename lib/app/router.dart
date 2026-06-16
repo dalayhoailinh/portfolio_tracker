@@ -6,6 +6,7 @@ import '../features/auth/presentation/pages/login_page.dart';
 import '../features/market/presentation/pages/benchmark_page.dart';
 import '../features/market/presentation/pages/market_page.dart';
 import '../features/market/presentation/pages/chart_page.dart';
+import '../features/market/presentation/pages/real_chart_page.dart';
 import '../features/portfolio/presentation/pages/add_stock_page.dart';
 import '../features/portfolio/presentation/pages/home_page.dart';
 import '../features/shell/presentation/pages/shell_page.dart';
@@ -40,6 +41,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           final symbol = state.pathParameters['symbol']!;
           return ChartPage(symbol: symbol);
+        },
+      ),
+      GoRoute(
+        path: '/real-chart/:symbol',
+        builder: (context, state) {
+          final symbol = state.pathParameters['symbol']!;
+          return RealChartPage(symbol: symbol);
         },
       ),
     ],
