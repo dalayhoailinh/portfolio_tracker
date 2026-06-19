@@ -56,6 +56,30 @@ data           RustIndicatorEngine → lib/src/rust (generated) → rust/src/api
 Rule learned: **batch, not per-call** — move math across the bridge only
 when computation cost ≫ bridge overhead.
 
+## Real market data (Q2 Tháng 5 - EODHD)
+
+Historical daily OHLCV now comes from the EODHD REST API.
+
+```
+presentation   RealChartPage → dailyCandlesProvider → CandlestickChart
+domain         IMarketDataSource (pure Dart contract)
+               MarketDataException family (NetworkException, ApiKeyException, ...)
+data           EodhdDataSource → http.get → EODHD
+               EodCandleDto.fromJson → MinuteCandle (anti-corruption mapping)
+```
+
+- The HTTP API is hidden behind `IMarketDataSource`. UI and domain are
+  HTTP-free and JSON-free; swapping EODHD for Alpaca = one new class.
+- Every network/HTTP failure is translated into a typed domain error; the
+  UI shows a friendly message + Retry, never a raw stack trace.
+- The `http.Client` is injected, so the data source is unit-tested with a
+  fake client — no network needed.
+- API key is passed via `--dart-define=EODHD_API_KEY=...`; the committed
+  default is EODHD's public `demo` token. Never commit a real key.
+
+Run with a real key:
+`flutter run -d windows --dart-define=EODHD_API_KEY=your_key`
+
 ## Features
 
 | Guide | Feature |

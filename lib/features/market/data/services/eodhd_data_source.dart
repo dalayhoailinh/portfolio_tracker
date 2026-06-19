@@ -56,7 +56,7 @@ class EodhdDataSource implements IMarketDataSource {
       }
       return candles;
     } catch (e) {
-      throw MarketDataException('Unexpected EODHD response: $e');
+      throw MarketDataParseException('Unexpected EODHD response: $e');
     }
   }
 }
