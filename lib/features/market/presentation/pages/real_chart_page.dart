@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../data/providers/daily_candles_provider.dart';
+import '../../data/providers/real_sma_provider.dart';
 import '../../domain/entities/market_data_exception.dart';
 import '../widgets/candlestick_chart.dart';
 
@@ -55,6 +56,14 @@ class RealChartPage extends ConsumerWidget {
               ? candles.sublist(candles.length - 90)
               : candles;
 
+          final sma = ref
+              .watch(realSmaProvider((symbol: symbol, window: 20)))
+              .asData
+              ?.value;
+          final visibleSma = (sma != null && sma.length == candles.length)
+              ? (candles.length > 90 ? sma.sublist(sma.length - 90) : sma)
+              : null;
+
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -71,7 +80,7 @@ class RealChartPage extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: const EdgeInsets.fromLTRB(12, 12, 4, 12),
-                  child: CandlestickChart(candles: visible),
+                  child: CandlestickChart(candles: visible, sma: visibleSma),
                 ),
               ],
             ),
