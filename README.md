@@ -80,33 +80,6 @@ data           EodhdDataSource → http.get → EODHD
 Run with a real key:
 `flutter run -d windows --dart-define=EODHD_API_KEY=your_key`
 
-## Real-time market data (Q2 Tháng 5 — Alpaca WebSocket)
-
-Live prices now stream from Alpaca's crypto WebSocket (24/7).
-
-```
-presentation   LivePricesPage → livePricesProvider (StreamProvider) → PriceFlash
-domain         ILivePriceSource (pure Dart contract, returns Stream<LiveTick>)
-               LiveStreamException (in the MarketDataException family)
-data           AlpacaPriceStream → WebSocket (handshake: auth → subscribe)
-               AlpacaFrameParser.parseTrades → LiveTick (anti-corruption mapping)
-               TextSocket abstraction → injectable → testable with a fake socket
-```
-
-- The WebSocket is hidden behind `ILivePriceSource`. UI and domain are
-  socket-free and JSON-free; swapping Alpaca for another feed = one new class.
-- A one-shot REST fetch is a `Future`; a live feed is a `Stream`. Same wall.
-- Connection/auth/drop failures are translated into a typed `LiveStreamException`;
-  the UI shows a friendly message + Retry, never a raw error.
-- `autoDispose` + the controller's `onCancel` close the socket when the page is
-  gone — no leaked connection (the free tier allows only one).
-- The socket is injected (`TextSocket`), so the stream is unit-tested with a
-  fake — no network needed.
-- Keys are passed via `--dart-define`; nothing secret is committed.
-
-Run with live data:
-`flutter run -d windows --dart-define=ALPACA_KEY=your_key --dart-define=ALPACA_SECRET=your_secret`
-
 ## Features
 
 | Guide | Feature |

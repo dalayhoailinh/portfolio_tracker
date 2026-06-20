@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/data/providers/router_notifier.dart';
 import '../features/auth/presentation/pages/login_page.dart';
 import '../features/market/presentation/pages/benchmark_page.dart';
-import '../features/market/presentation/pages/live_prices_page.dart';
 import '../features/market/presentation/pages/market_page.dart';
 import '../features/market/presentation/pages/chart_page.dart';
 import '../features/market/presentation/pages/real_chart_page.dart';
@@ -50,10 +49,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           final symbol = state.pathParameters['symbol']!;
           return RealChartPage(symbol: symbol);
         },
-      ),
-      GoRoute(
-        path: '/live-prices',
-        builder: (context, state) => const LivePricesPage(),
       ),
     ],
   );
