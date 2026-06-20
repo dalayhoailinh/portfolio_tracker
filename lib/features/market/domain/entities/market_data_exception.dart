@@ -22,3 +22,7 @@ class ApiKeyException extends MarketDataException {
 class MarketDataParseException extends MarketDataException {
   MarketDataParseException(super.message);
 }
+
+class LiveStreamException extends MarketDataException {
+  LiveStreamException(super.message);
+}
