@@ -7,6 +7,8 @@ abstract final class ApiConfig {
 
   static const String alpacaCryptoWsUrl =
       'wss://stream.data.alpaca.markets/v1beta3/crypto/us';
+  static const String alpacaCryptoDataUrl =
+      'https://data.alpaca.markets/v1beta3/crypto/us';
   static const String alpacaKey = String.fromEnvironment(
     'ALPACA_KEY',
     defaultValue: '',
