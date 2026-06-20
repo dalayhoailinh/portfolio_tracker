@@ -17,6 +17,11 @@ class MarketPage extends ConsumerWidget {
         title: const Text('Market'),
         actions: [
           IconButton(
+            tooltip: 'Live crypto prices',
+            icon: const Icon(Icons.sensors_rounded),
+            onPressed: () => context.push('/live-prices'),
+          ),
+          IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () => ref.read(marketProvider.notifier).resetMarket(),
           ),
